@@ -1,6 +1,10 @@
-resource "aws_vpc" "vpcn" {
-  cidr_block = "10.226.0.0/16"
+locals {
+  bucket-name = "s3-${(formatdate("YY-MM-DD-HH-mm", timestamp()))}"
+}
+
+resource "aws_s3_bucket" "s3b" {
+  bucket = local.bucket-name
   tags = {
-    Name = "vpc from cli to HCPcloud"
+    Name = local.bucket-name
   }
 }
